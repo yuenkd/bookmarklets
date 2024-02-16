@@ -1,0 +1,1 @@
+Array.from(document.getElementsByClassName('exploreMediaImageCard')).forEach((element) => console.log(element.style.backgroundImage.match(/media\/(.*).jpg/)[1]))
