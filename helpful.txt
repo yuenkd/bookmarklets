@@ -1,0 +1,45 @@
+###BASH###
+Replace text in files -> find . -type f -exec sed -bi 's/http:/https:/ig' {} +
+Gunzip all gzipped files -> for f in `find . -name '*.gz'`; do gunzip "$f"; done
+gzip sitemaps -> for f in `find . -name '*.xml' -not -name 'sitemapindex*.xml'`; do gzip "$f"; done
+
+###POWERSHELL###
+(h)[-1].CommandLine | clip (Copy last command to clipboard)
+Get-ChildItem -Path .\ -Filter *.js -Recurse -File -Name (Get files with extension)
+
+###GIT###
+git log --oneline --no-merges <last tag or hash>..HEAD
+git diff -w
+git shortlog -sn
+
+###OPENSSL###
+openssl s_client -showcerts -connect www.ancestrydev.com:443 -servername www.ancestrydev.com
+
+add this to openssl.cfg
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = www.ancestrydev.com
+DNS.2 = www.ancestrystage.com
+DNS.3 = www.ancestry.com
+
+and then add "-extensions req_ext" to the command to generate the cert
+
+###NODE###
+Find what is causing node to stay open:
+var wtf = require('wtfnode'); as early as possible
+wtf.dump()
+
+###DOCKER###
+#!/bin/bash
+# Delete all containers
+docker rm $(docker ps -a -q)
+# Delete all images
+docker rmi $(docker images -q)
+
+
+###Server Name Bookmarklet###
+
+javascript:var serverName=new RegExp(/ SN:(\w*) /);var serverNameFromBody=document.getElementsByTagName('body')[0].innerHTML.match(serverName);var serverNameFromLastChild=document.lastChild.textContent.match(serverName);if(serverNameFromBody){alert(serverNameFromBody[1]);}else if (serverNameFromLastChild){alert(serverNameFromLastChild[1]);}void(0);
